@@ -1,0 +1,69 @@
+@prefix schema: <http://schema.org/> .
+@prefix gr: <http://purl.org/goodrelations/v1#> .
+@prefix ex: <http://example.com/> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+
+# Définition de l'offre
+ex:offer a gr:Offering ;
+    gr:includesObject ex:book ;
+    gr:hasPriceSpecification ex:priceSpec ;
+    gr:availableAtOrFrom ex:library .
+
+# Définition du livre
+ex:book a schema:Book ;
+    schema:headline "Les Misérables" ;
+    schema:author ex:victorHugo ;
+    schema:datePublished "1862-01-01"^^xsd:date ;
+    schema:publisher "A. Lacroix, Verboeckhoven & Cie" ;
+    schema:inLanguage "fr" ;
+    schema:itemCondition "new" ;
+    schema:isbn "978-2-01-185017-0" ;
+    schema:abstract "Les Misérables est un roman de Victor Hugo paru en 1862." .
+
+# Définition de l'auteur
+ex:victorHugo a schema:Author ;
+    schema:Nationality "French" ;
+    schema:GivenName "Victor" ;
+    schema:FamilyName "Hugo" ;
+    schema:birthDate "1802-02-26"^^xsd:date ;
+    schema:DeathDate "1885-05-22"^^xsd:date .
+
+# Définition des détails de livraison de l'offre
+ex:shippingDetails a gr:OfferShippingDetails ;
+    schema:deliveryTime "3-5 business days" ;
+    schema:weight "500g" ;
+    schema:shippingDestination "FR" ;
+    schema:shippingOrigin "FR" ;
+    schema:shippingRate "5 EUR" ;
+    schema:doesNotShip false ;
+    schema:dimensions "20x13x4 cm" .
+
+# Définition des spécifications de prix de l'offre
+ex:priceSpec a gr:UnitPriceSpecification ;
+    gr:hasCurrency "EUR" ;
+    gr:hasCurrencyValue "15" .
+
+# Définition de la bibliothèque
+ex:library a schema:Library ;
+    schema:name "Librairie La Belle Lurette" ;
+    schema:address "26 Rue Saint-Antoine, 75004 Paris" ;
+    schema:telephone "+33 1 42 72 61 76" .
+
+# Définition de l'acheteur
+ex:buyer a schema:Person ;
+    schema:identifier "15" ;
+    schema:givenName "Antoine" ;
+    schema:familyName "Zimmermann" ;
+    schema:address "29 Rue Pierre et Dominique Ponchardier, Saint-Étienne 42100" ;
+    schema:birthDate "1998-07-12"^^xsd:date ;
+    schema:email "antoine.zimmermann@etu.emse.fr" ;
+    schema:telephone "+33 6 07 08 09 10" ;
+    schema:seeks ex:book .
+
+# Définition de la transaction
+ex:transaction a schema:Transaction ;
+    schema:offeringIdentifier ex:offer ;
+    schema:clientIdentifier ex:buyer ;
+    schema:purchaseDate "2023-04-20"^^xsd:date .
