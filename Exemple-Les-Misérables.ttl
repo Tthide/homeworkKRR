@@ -46,10 +46,9 @@ ex:priceSpec a gr:UnitPriceSpecification ;
     gr:hasCurrencyValue "15" .
 
 # Définition de la bibliothèque
-ex:library a schema:Library ;
+ex:library a schema:Location ;
     schema:name "Librairie La Belle Lurette" ;
-    schema:address "26 Rue Saint-Antoine, 75004 Paris" ;
-    schema:telephone "+33 1 42 72 61 76" .
+    schema:hasGlobalLocationNumber "2613524894260" .
 
 # Définition de l'acheteur
 ex:buyer a schema:Person ;
