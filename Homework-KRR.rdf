@@ -1331,6 +1331,16 @@ Typical unit code(s): CMT for centimeters, INH for inches</rdfs:comment>
     
 
 
+    <!-- http://purl.org/goodrelations/v1#Weight -->
+
+    <owl:DatatypeProperty rdf:about="http://purl.org/goodrelations/v1#Weight">
+        <rdfs:subPropertyOf rdf:resource="http://www.w3.org/2002/07/owl#topDataProperty"/>
+        <rdfs:domain rdf:resource="http://purl.org/goodrelations/v1#OfferShippingDetails"/>
+        <rdfs:range rdf:resource="http://www.w3.org/2001/XMLSchema#string"/>
+    </owl:DatatypeProperty>
+    
+
+
     <!-- http://purl.org/goodrelations/v1#abstract -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/goodrelations/v1#abstract">
@@ -1551,6 +1561,7 @@ Note 3: If the shop re-opens on the same day of the week or set of days of the w
     <!-- http://purl.org/goodrelations/v1#condition -->
 
     <owl:DatatypeProperty rdf:about="http://purl.org/goodrelations/v1#condition">
+        <rdfs:domain rdf:resource="http://purl.org/goodrelations/v1#Book"/>
         <rdfs:domain>
             <owl:Class>
                 <owl:unionOf rdf:parseType="Collection">
@@ -2768,21 +2779,7 @@ DEPRECATED. Do not use this class in data or queries.</rdfs:comment>
 
     <!-- http://purl.org/goodrelations/v1#OfferShippingDetails -->
 
-    <owl:Class rdf:about="http://purl.org/goodrelations/v1#OfferShippingDetails">
-        <rdfs:comment xml:lang="en">OfferShippingDetails represents information about shipping destinations.
-
-Multiple of these entities can be used to represent different shipping rates for different destinations:
-
-One entity for Alaska/Hawaii. A different one for continental US. A different one for all France.
-
-Multiple of these entities can be used to represent different shipping costs and delivery times.
-
-Two entities that are identical but differ in rate and time:
-
-E.g. Cheaper and slower: $5 in 5-7 days or Fast and expensive: $15 in 1-2 days.</rdfs:comment>
-        <rdfs:isDefinedBy>https://schema.org/OfferShippingDetails</rdfs:isDefinedBy>
-        <rdfs:label xml:lang="en">OfferShippingDetails</rdfs:label>
-    </owl:Class>
+    <owl:Class rdf:about="http://purl.org/goodrelations/v1#OfferShippingDetails"/>
     
 
 
@@ -3191,6 +3188,38 @@ Examples: Parts and Labor, Parts</rdfs:comment>
     
 
 
+    <!-- http://purl.org/goodrelations/v1#Auteur_1 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Auteur_1">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Author"/>
+        <BookWritten rdf:resource="http://purl.org/goodrelations/v1#Book_1"/>
+        <DeathDate>22 Mai 1885</DeathDate>
+        <FamilyName>Hugo</FamilyName>
+        <GivenName>Victor</GivenName>
+        <Nationality>Francais</Nationality>
+        <birthDate>26 février 1802</birthDate>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/goodrelations/v1#Book_1 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Book_1">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Book"/>
+        <AuthorProperty rdf:resource="http://purl.org/goodrelations/v1#Auteur_1"/>
+        <Genre>Roman</Genre>
+        <InLanguage>Francais</InLanguage>
+        <Isbn rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">747648736</Isbn>
+        <Publisher>Albert Lacroix</Publisher>
+        <abstract>Décrit la vie de pauvres gens dans Paris et la France provinciale du premier tiers du XIXe siècle</abstract>
+        <bookFormat>Poche</bookFormat>
+        <condition>new</condition>
+        <datePublished rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1862</datePublished>
+        <headline>Les Misérables</headline>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://purl.org/goodrelations/v1#Business -->
 
     <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Business">
@@ -3211,6 +3240,22 @@ DEPRECATED. Use gr:seeks instead.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/goodrelations/v1"/>
         <rdfs:label xml:lang="en">Buy (business function, DEPRECATED)</rdfs:label>
         <owl:deprecated rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">true</owl:deprecated>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/goodrelations/v1#Buyer_1 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Buyer_1">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Person"/>
+        <seeks rdf:resource="http://purl.org/goodrelations/v1#Book_1"/>
+        <Email>antoine.zimmermann@etu.emse.fr</Email>
+        <FamilyName>Zimmermann</FamilyName>
+        <GivenName>Antoine</GivenName>
+        <Identifier rdf:datatype="http://www.w3.org/2001/XMLSchema#integer">34</Identifier>
+        <Téléphone>06 06 06 06 06</Téléphone>
+        <address>20 Bd Alexandre de Fraissinette</address>
+        <birthDate>21 Avril 2023</birthDate>
     </owl:NamedIndividual>
     
 
@@ -3474,22 +3519,6 @@ Note: This is just a rough classification for filtering offers. It is up to the 
     
 
 
-    <!-- http://purl.org/goodrelations/v1#Les_Misérables -->
-
-    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Les_Misérables">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Book"/>
-        <AuthorProperty rdf:resource="http://purl.org/goodrelations/v1#Victor_Hugo"/>
-        <Genre>Roman</Genre>
-        <InLanguage>Francais</InLanguage>
-        <Publisher>Albert Lacroix</Publisher>
-        <abstract>Décrit la vie de pauvres gens dans Paris et la France provinciale du premier tiers du XIXe siècle</abstract>
-        <bookFormat>Poche</bookFormat>
-        <datePublished rdf:datatype="http://www.w3.org/2001/XMLSchema#decimal">1862</datePublished>
-        <headline>Les Misérables</headline>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://purl.org/goodrelations/v1#Maintain -->
 
     <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Maintain">
@@ -3522,6 +3551,32 @@ Note: This is just a rough classification for filtering offers. It is up to the 
         <rdfs:comment xml:lang="en">Monday as a day of the week.</rdfs:comment>
         <rdfs:isDefinedBy rdf:resource="http://purl.org/goodrelations/v1"/>
         <rdfs:label xml:lang="en">Monday (day of week)</rdfs:label>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/goodrelations/v1#OfferShippingDetails -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#OfferShippingDetails">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#OfferShippingDetails"/>
+        <clientIdentifier rdf:resource="http://purl.org/goodrelations/v1#Buyer_1"/>
+        <offeringIdentifier rdf:resource="http://purl.org/goodrelations/v1#Offering_1"/>
+        <ShippingDestination>FR</ShippingDestination>
+        <ShippingOrigin>FR</ShippingOrigin>
+        <ShippingRate>5 EUR</ShippingRate>
+        <Weight>500 g</Weight>
+        <bookFormat>20x13x4 cm</bookFormat>
+        <deliveryTime>3 à 5 jours</deliveryTime>
+        <doesNotShip rdf:datatype="http://www.w3.org/2001/XMLSchema#boolean">false</doesNotShip>
+    </owl:NamedIndividual>
+    
+
+
+    <!-- http://purl.org/goodrelations/v1#Offering_1 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Offering_1">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
+        <includesObject rdf:resource="http://purl.org/goodrelations/v1#Book_1"/>
     </owl:NamedIndividual>
     
 
@@ -3687,6 +3742,15 @@ Example: Car maintenance could be expressed both as &quot;provide the service ca
     
 
 
+    <!-- http://purl.org/goodrelations/v1#Transaction_1 -->
+
+    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Transaction_1">
+        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Transaction"/>
+        <PurchaseDate>21 Avril 2023</PurchaseDate>
+    </owl:NamedIndividual>
+    
+
+
     <!-- http://purl.org/goodrelations/v1#Tuesday -->
 
     <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Tuesday">
@@ -3723,20 +3787,6 @@ Example: Car maintenance could be expressed both as &quot;provide the service ca
     
 
 
-    <!-- http://purl.org/goodrelations/v1#Victor_Hugo -->
-
-    <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Victor_Hugo">
-        <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Author"/>
-        <BookWritten rdf:resource="http://purl.org/goodrelations/v1#Les_Misérables"/>
-        <DeathDate>22 mai 1885</DeathDate>
-        <FamilyName>Hugo</FamilyName>
-        <GivenName>Victor</GivenName>
-        <Nationality>francais</Nationality>
-        <birthDate>26 février 1802</birthDate>
-    </owl:NamedIndividual>
-    
-
-
     <!-- http://purl.org/goodrelations/v1#Wednesday -->
 
     <owl:NamedIndividual rdf:about="http://purl.org/goodrelations/v1#Wednesday">
@@ -3752,6 +3802,32 @@ Example: Car maintenance could be expressed both as &quot;provide the service ca
         <rdf:type rdf:resource="http://purl.org/goodrelations/v1#Offering"/>
         <category>42</category>
         <description>VGhlIFNldmVuIE5vYWhpZGUgTGF3cw0KMS4gQmVsaWVmIGluIEctZA0KMi4gUmVzcGVjdCBHLWQgYW5kIHByYWlzZSBoaW0NCjMuIFJlc3BlY3QgaHVtYW4gbGlmZQ0KNC4gUmVzcGVjdCB0aGUgZmFtaWx5DQo1LiBSZXNwZWN0IGh1bWFuIGJlaW5ncw0KNi4gSGF2ZSBhIGp1ZGljaWFsIHN5c3RlbQ0KNy4gUmVzcGVjdCBhbGwgY3JlYXR1cmVz</description>
+    </rdf:Description>
+    
+
+
+    <!-- 
+    ///////////////////////////////////////////////////////////////////////////////////////
+    //
+    // Annotations
+    //
+    ///////////////////////////////////////////////////////////////////////////////////////
+     -->
+
+    <rdf:Description rdf:about="http://purl.org/goodrelations/v1#OfferShippingDetails">
+        <rdfs:comment xml:lang="en">OfferShippingDetails represents information about shipping destinations.
+
+Multiple of these entities can be used to represent different shipping rates for different destinations:
+
+One entity for Alaska/Hawaii. A different one for continental US. A different one for all France.
+
+Multiple of these entities can be used to represent different shipping costs and delivery times.
+
+Two entities that are identical but differ in rate and time:
+
+E.g. Cheaper and slower: $5 in 5-7 days or Fast and expensive: $15 in 1-2 days.</rdfs:comment>
+        <rdfs:isDefinedBy>https://schema.org/OfferShippingDetails</rdfs:isDefinedBy>
+        <rdfs:label xml:lang="en">OfferShippingDetails</rdfs:label>
     </rdf:Description>
     
 
